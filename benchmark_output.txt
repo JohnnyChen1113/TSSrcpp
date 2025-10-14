@@ -1,0 +1,89 @@
+Warning: program compiled against libxml 212 using older 209
+TSSr: Using fast Rcpp implementation (30-50x faster)
+Warning messages:
+1: multiple methods tables found for ‘sort’ 
+2: multiple methods tables found for ‘sort’ 
+3: multiple methods tables found for ‘sort’ 
+
+=== Benchmark 1: Peak Detection ===
+Comparing findPeaksCpp vs R implementation
+
+Testing with 1000 positions...
+          expr       min        lq     mean     median        uq       max
+1    R_version 16378.229 16761.580 20798.19 20016.2705 24201.080 27830.662
+2 Rcpp_version    12.648    13.041    23.30    23.5865    29.002    49.164
+  neval
+1    10
+2    10
+
+Speedup: 848.6x faster with Rcpp
+Time saved: 20.02 ms → 0.02 ms
+
+Testing with 5000 positions...
+          expr       min        lq        mean    median         uq        max
+1    R_version 185153.60 185630.19 195094.0369 189216.69 194202.053 245150.115
+2 Rcpp_version     83.51    114.35    129.0511    115.56    126.009    232.122
+  neval
+1    10
+2    10
+
+Speedup: 1637.4x faster with Rcpp
+Time saved: 189.22 ms → 0.12 ms
+
+Testing with 10000 positions...
+          expr        min         lq        mean     median         uq
+1    R_version 681590.600 688128.502 798395.0818 697728.601 702264.569
+2 Rcpp_version    251.182    253.713    282.6609    275.778    306.562
+          max neval
+1 1721061.194    10
+2     339.836    10
+
+Speedup: 2530.0x faster with Rcpp
+Time saved: 697.73 ms → 0.28 ms
+
+Testing with 50000 positions...
+          expr         min           lq         mean       median           uq
+1    R_version 18089.92617 18197.686742 19106.964017 19059.220056 19471.908807
+2 Rcpp_version     3.29721     3.303808     3.363666     3.365035     3.401639
+           max neval
+1 20824.733972    10
+2     3.488215    10
+
+Speedup: 5663.9x faster with Rcpp
+Time saved: 19059.22 ms → 3.37 ms
+
+
+=== Benchmark 2: Local Filtering ===
+          expr        min         lq       mean     median        uq        max
+1    R_version 1823.40640 1826.01823 1830.68438 1828.78023 1833.1349 1856.95639
+2 Rcpp_version   33.04837   33.10796   33.27305   33.15465   33.2392   34.52196
+  neval
+1    20
+2    20
+
+Local filtering speedup: 55.2x faster
+
+=== Benchmark 3: Complete Clustering Workflow ===
+
+=== Generating Performance Plot ===
+Warning message:
+Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead. 
+Plot saved to: benchmark_rcpp_performance.pdf
+
+======================================================================
+                    PERFORMANCE SUMMARY
+======================================================================
+
+Peak Detection Speedups:
+  1000 positions: 848.6x faster
+  5000 positions: 1637.4x faster
+  10000 positions: 2530.0x faster
+  50000 positions: 5663.9x faster
+
+Local Filtering: 55.2x faster
+
+Recommendation: Use Rcpp implementation (default) for all production analyses.
+For datasets with >10,000 TSS positions, Rcpp provides dramatic speedups.
+
+======================================================================
